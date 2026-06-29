@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant</title>
+
+<style>
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Times New Roman', Times, serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    text-align:center;
+    color:white;
+}
+
+.para h2,
+.para h3{
+    color:#FFD700;
+}
+
+#Home{
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+}
+
+.menu{
+    list-style:none;
+    margin:0;
+    display:flex;
+    justify-content:center;
+}
+
+ul{
+    display:flex;
+    flex-direction:row;
+    padding:10px;
+    margin:0;
+    gap:25px;
+}
+
+li{
+    display:block;
+    background:white;
+    color:#0f2027;
+    border-radius:10px;
+    border:2px solid #ff9800;
+    padding:20px;
+}
+
+li:hover{
+    cursor:pointer;
+    background:#ff9800;
+    color:white;
+    transition:.5s;
+}
+
+a{
+    text-decoration:none;
+    color:#0f2027;
+    font-weight:bold;
+}
+
+a:hover{
+    color:white;
+}
+
+.section-title{
+    font-size:40px;
+    margin-bottom:20px;
+    color:#FFD700;
+    text-shadow:2px 2px 5px black;
+}
+
+section{
+    min-height:100vh;
+    margin-top:20px;
+}
+
+.container{
+    width:700px;
+    height:300px;
+    display:flex;
+    margin-left:300px;
+    justify-content:center;
+    text-align:center;
+    gap:50px;
+}
+
+.one{
+    display:flex;
+    background:linear-gradient(to right,#4b6cb7,#182848);
+    flex-direction:row;
+    border:2px solid white;
+    border-radius:20px;
+}
+
+.para{
+    width:720px;
+    height:auto;
+    border:2px solid white;
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+}
+
+.cont{
+    display:flex;
+    flex-direction:column;
+    color:#f5f5f5;
+}
+
+.img{
+    width:500px;
+    height:auto;
+    position:relative;
+    padding:20px;
+    border:2px solid white;
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+}
+
+.img img{
+    object-fit:cover;
+    width:500px;
+    height:auto;
+    border:2px solid white;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.high{
+    display:flex;
+    flex-direction:column;
+}
+
+.high li{
+    background:linear-gradient(to right,#ff512f,#dd2476);
+    color:white;
+    border:none;
+}
+
+.high li:hover{
+    background:linear-gradient(to right,#ff9966,#ff5e62);
+}
+
+button{
+    margin-top:100px;
+    width:150px;
+    height:60px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(to right,#ff512f,#f09819);
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    transform:scale(1.1);
+    transition:.5s;
+    background:linear-gradient(to right,#00c6ff,#0072ff);
+}
+
+hr{
+    border:1px solid rgba(255,255,255,.3);
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 style="color:#FFD700;">🍽 SPICE GARDEN RESTAURANT 🍽</h1>
+<hr>
+
+<div class="navbar">
+    <ul class="menu">
+        <li><a href="#Home">Home</a></li>
+        <li><a href="#Menu">Menu</a></li>
+        <li><a href="#Gallery">Gallery</a></li>
+        <li><a href="#About">About</a></li>
+        <li><a href="#Contact">Contact</a></li>
+        <li><a href="#book">Book Table</a></li>
+    </ul>
+</div>
+
+<hr>
+
+<section id="Home">
+
+<h2 class="section-title">Home Section</h2>
+
+<div class="one">
+
+<div class="para">
+
+<h2>Welcome to Our Restaurant</h2>
+<h2>Spice Garden</h2>
+<h3>Authentic Flavors, Memorable Moments</h3>
+
+<div class="cont">
+
+<p>
+A Taste You'll Never Forget. Where every meal is crafted with passion,
+every ingredient is fresh, and every guest is treated like family.
+</p>
+
+<p>
+At Spice Garden, we believe that food is more than just a meal—it's an
+experience. Our talented chefs prepare every dish using carefully
+selected ingredients, authentic recipes, and traditional cooking
+techniques to deliver unforgettable flavors.
+</p>
+
+<p>
+From aromatic biryanis and spicy curries to freshly baked pizzas,
+Chinese specialties, refreshing beverages and desserts, our menu
+offers something for everyone.
+</p>
+
+<p>
+Welcome to Spice Garden, where every dish is prepared with fresh
+ingredients and authentic recipes. Enjoy delicious Indian, Chinese,
+and Continental cuisine.
+</p>
+
+</div>
+
+<hr>
+
+<h3>Highlights</h3>
+
+<hr>
+
+<ul class="high">
+<li>⭐ 10+ Years of Experience</li>
+<li>👨‍🍳 Expert Chefs</li>
+<li>🍽️ 100+ Delicious Dishes</li>
+<li>😊 5000+ Happy Customers</li>
+</ul>
+
+<hr>
+
+</div>
+
+<div class="img">
+<img src="C:\Users\Dell\OneDrive\Project\Resturant\home.jpeg">
+<img src="C:\Users\Dell\OneDrive\Project\Resturant\home1.jpeg">
+<img src="C:\Users\Dell\OneDrive\Project\Resturant\home2.jpeg">
+</div>
+
+</div>
+
+</section>
+
+<hr>
+
+<section id="Menu">
+<h2 class="section-title">Menu Section</h2>
+</section>
+
+<hr>
+
+<section id="Gallery">
+<h2 class="section-title">Gallery Section</h2>
+</section>
+
+<hr>
+
+<section id="About">
+<h2 class="section-title">About Section</h2>
+</section>
+
+<hr>
+
+<section id="Contact">
+<h2 class="section-title">Contact Details</h2>
+</section>
+
+<hr>
+
+<section id="book">
+
+<h2 class="section-title">Booking Details</h2>
+
+<div class="container">
+<button onclick="changepage()">Table Book</button>
+<button>Order Food</button>
+</div>
+
+<hr>
+
+</section>
+
+<script>
+
+window.onload=function(){
+history.replaceState(null,null,' ');
+window.scrollTo(0,0);
+}
+
+function changepage(){
+window.location.href="tableBook.html";
+}
+
+</script>
+
+</body>
+</html>
