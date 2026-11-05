@@ -1,385 +1,728 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Table Booking</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 70px;
+            color: #fff;
+            margin: 30px 0;
+            text-shadow: 3px 3px 10px rgba(0,0,0,.4);
+        }
+
+        h2 {
+            color: #fff;
+            margin: 20px;
+            font-size: 35px;
+            letter-spacing: 2px;
+        }
+
+        hr {
+            border: 1px solid rgba(255,255,255,.3);
+            margin: 20px 0;
+        }
+
+        .premium, .gold, .silver {
+            padding: 25px;
+        }
+
+        .Trow {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .table {
+            width: 260px;
+            height: 220px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .4s;
+            box-shadow: 0 10px 25px rgba(0,0,0,.3);
+        }
+
+        .table:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 20px 35px rgba(0,0,0,.45);
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(45deg,#ff512f,#dd2476);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .4s;
+            box-shadow: 0 8px 20px rgba(0,0,0,.3);
+        }
+
+        button:hover {
+            transform: scale(1.08);
+            background: linear-gradient(45deg,#11998e,#38ef7d);
+        }
+
+        .detail {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 650px;
+            max-width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(255,255,255,.18);
+            backdrop-filter: blur(18px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,.4);
+            padding: 30px;
+            z-index: 1000;
+            animation: popup .4s ease;
+        }
+
+        @keyframes popup {
+            from {
+                transform: translate(-50%,-60%) scale(.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%,-50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .detail h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .selected-table {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .tb {
+            width: 100%;
+            margin: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        label {
+            width: 120px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            max-width: 350px;
+            padding: 12px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,.9);
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px #00f7ff;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        form button {
+            margin: 20px auto 0;
+            width: 180px;
+            background: linear-gradient(45deg,#00c9ff,#92fe9d);
+            color: #000;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background: linear-gradient(45deg,#ff416c,#ff4b2b);
+            color: #fff;
+        }
+
+        .close-btn {
+            background: #333;
+            color: white;
+        }
+
+        .close-btn:hover {
+            background: #555;
+        }
+
+        .table-info {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        @media(max-width:768px) {
+
+            h1 {
+                font-size: 45px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .Trow {
+                gap: 25px;
+            }
+
+            .table {
+                width: 220px;
+                height: 180px;
+            }
+
+            .row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            label {
+                width: 100%;
+            }
+
+            input {
+                max-width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
-<style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:'Poppins',sans-serif;
-    }
 
-    body{
-        background:linear-gradient(135deg,#4e54c8,#8f94fb);
-        min-height:100vh;
-    }
-
-    h1{
-        text-align:center;
-        font-size:70px;
-        color:#fff;
-        margin:30px 0;
-        text-shadow:3px 3px 10px rgba(0,0,0,.4);
-    }
-
-    h2{
-        color:#fff;
-        margin:20px;
-        font-size:35px;
-        letter-spacing:2px;
-    }
-
-    hr{
-        border:1px solid rgba(255,255,255,.3);
-        margin:20px 0;
-    }
-
-    .premium,
-    .gold,
-    .silver{
-        padding:25px;
-    }
-
-    .Trow{
-        display:flex;
-        justify-content:center;
-        gap:50px;
-        margin-bottom:40px;
-        flex-wrap:wrap;
-    }
-
-    .table{
-        width:260px;
-        height:220px;
-        border-radius:20px;
-        background:rgba(255,255,255,.15);
-        backdrop-filter:blur(15px);
-        border:1px solid rgba(255,255,255,.3);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        transition:.4s;
-        box-shadow:0 10px 25px rgba(0,0,0,.3);
-    }
-
-    .table:hover{
-        transform:translateY(-12px) scale(1.05);
-        box-shadow:0 20px 35px rgba(0,0,0,.45);
-    }
-
-    button{
-        width:150px;
-        height:50px;
-        border:none;
-        border-radius:30px;
-        background:linear-gradient(45deg,#ff512f,#dd2476);
-        color:#fff;
-        font-size:18px;
-        font-weight:bold;
-        cursor:pointer;
-        transition:.4s;
-        box-shadow:0 8px 20px rgba(0,0,0,.3);
-    }
-
-    button:hover{
-        transform:scale(1.08);
-        background:linear-gradient(45deg,#11998e,#38ef7d);
-    }
-
-    .detail{
-        display:none;
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        width:650px;
-        max-width:95%;
-        background:rgba(255,255,255,.18);
-        backdrop-filter:blur(18px);
-        border-radius:20px;
-        border:1px solid rgba(255,255,255,.3);
-        box-shadow:0 20px 50px rgba(0,0,0,.4);
-        padding:30px;
-        z-index:1000;
-        animation:popup .4s ease;
-    }
-
-    @keyframes popup{
-        from{
-            transform:translate(-50%,-60%) scale(.8);
-            opacity:0;
-        }
-        to{
-            transform:translate(-50%,-50%) scale(1);
-            opacity:1;
-        }
-    }
-
-    .detail h2{
-        text-align:center;
-        margin-bottom:20px;
-        color:white;
-    }
-
-    .tb{
-        width:100%;
-        margin:auto;
-    }
-
-    form{
-        display:flex;
-        flex-direction:column;
-        gap:20px;
-    }
-
-    .row{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-    }
-
-    label{
-        width:120px;
-        color:white;
-        font-size:20px;
-        font-weight:bold;
-    }
-
-    input{
-        width:100%;
-        max-width:350px;
-        padding:12px;
-        border:none;
-        outline:none;
-        border-radius:10px;
-        font-size:16px;
-        background:rgba(255,255,255,.9);
-    }
-
-    input:focus{
-        box-shadow:0 0 10px #00f7ff;
-    }
-
-    form button{
-        margin:30px auto 0;
-        width:180px;
-        background:linear-gradient(45deg,#00c9ff,#92fe9d);
-        color:#000;
-        font-weight:bold;
-    }
-
-    form button:hover{
-        background:linear-gradient(45deg,#ff416c,#ff4b2b);
-        color:#fff;
-    }
-
-    @media(max-width:768px){
-
-        h1{
-            font-size:45px;
-        }
-
-        h2{
-            font-size:28px;
-        }
-
-        .Trow{
-            gap:25px;
-        }
-
-        .table{
-            width:220px;
-            height:180px;
-        }
-
-        .row{
-            flex-direction:column;
-            align-items:flex-start;
-            gap:8px;
-        }
-
-        label{
-            width:100%;
-        }
-
-        input{
-            max-width:100%;
-        }
-    }
-</style>
 <body>
+
     <hr>
+
     <h1>Table Booking</h1>
+
     <hr>
+
+
+    <!-- PREMIUM CLASS -->
+
     <section>
+
         <div class="premium">
+
             <h2>PREMIUM CLASS SERVICE</h2>
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(1,'P1','PREMIUM')">Order Me</button>
+                        <p class="table-info">P1</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(2,'P2','PREMIUM')">Order Me</button>
+                        <p class="table-info">P2</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(3,'P3','PREMIUM')">Order Me</button>
+                        <p class="table-info">P3</p>
                     </div>
                 </div>
+
             </div>
+
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(4,'P4','PREMIUM')">Order Me</button>
+                        <p class="table-info">P4</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(5,'P5','PREMIUM')">Order Me</button>
+                        <p class="table-info">P5</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(6,'P6','PREMIUM')">Order Me</button>
+                        <p class="table-info">P6</p>
                     </div>
                 </div>
+
             </div>
+
         </div>
+
     </section>
-        <br><hr>
+
+
+    <hr>
+
+
+    <!-- GOLD CLASS -->
+
     <section>
+
         <div class="gold">
+
             <h2>GOLD CLASS SERVICE</h2>
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(7,'G1','GOLD')">Order Me</button>
+                        <p class="table-info">G1</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(8,'G2','GOLD')">Order Me</button>
+                        <p class="table-info">G2</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(9,'G3','GOLD')">Order Me</button>
+                        <p class="table-info">G3</p>
                     </div>
                 </div>
+
             </div>
+
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(10,'G4','GOLD')">Order Me</button>
+                        <p class="table-info">G4</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(11,'G5','GOLD')">Order Me</button>
+                        <p class="table-info">G5</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(12,'G6','GOLD')">Order Me</button>
+                        <p class="table-info">G6</p>
                     </div>
                 </div>
+
             </div>
+
         </div>
+
     </section>
-        <br><hr>
+
+
+    <hr>
+
+
+    <!-- SILVER CLASS -->
+
     <section>
+
         <div class="silver">
+
             <h2>SILVER CLASS SERVICE</h2>
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()" id="o1">Order Me</button>
+                        <button onclick="showDiv(13,'S1','SILVER')">Order Me</button>
+                        <p class="table-info">S1</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(14,'S2','SILVER')">Order Me</button>
+                        <p class="table-info">S2</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(15,'S3','SILVER')">Order Me</button>
+                        <p class="table-info">S3</p>
                     </div>
                 </div>
+
             </div>
+
+
             <div class="Trow">
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(16,'S4','SILVER')">Order Me</button>
+                        <p class="table-info">S4</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(17,'S5','SILVER')">Order Me</button>
+                        <p class="table-info">S5</p>
                     </div>
                 </div>
+
                 <div class="table">
                     <div>
-                        <button onclick="showDiv()">Order Me</button>
+                        <button onclick="showDiv(18,'S6','SILVER')">Order Me</button>
+                        <p class="table-info">S6</p>
                     </div>
                 </div>
+
             </div>
+
         </div>
+
     </section>
-        <br><br><br>
-    <div class="detail">
-        <h2>TABLE BOOKING</h1>
+
+
+    <br><br>
+
+
+    <!-- BOOKING POPUP -->
+
+    <div class="detail" id="bookingPopup">
+
+        <h2>TABLE BOOKING</h2>
+
+        <p class="selected-table" id="selectedTable">
+            Selected Table: -
+        </p>
+
         <div class="tb">
-            <form>
+
+            <form id="bookingForm">
+
                 <div class="row">
+
                     <label>Name :</label>
-                    <input type="text" placeholder="Enter Your Name">
+
+                    <input
+                        type="text"
+                        id="customer_name"
+                        placeholder="Enter Your Name"
+                        required
+                    >
+
                 </div>
 
+
                 <div class="row">
+
                     <label>Purpose :</label>
-                    <input type="text" placeholder="Your purpose Of Visit">
+
+                    <input
+                        type="text"
+                        id="purpose"
+                        placeholder="Your Purpose Of Visit"
+                    >
+
                 </div>
 
+
                 <div class="row">
+
                     <label>Phone :</label>
-                    <input type="tel" placeholder="Enter your phone number">
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter Your Phone Number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
                 </div>
 
+
                 <div class="row">
+
                     <label>Date :</label>
-                    <input type="date">
+
+                    <input
+                        type="date"
+                        id="booking_date"
+                        required
+                    >
+
                 </div>
+
 
                 <div class="row">
-                    <label>Time :</label>
-                    <input type="time">
-                </div>
-                <button>Book now</button>
-            </form>
-        </div>
-    </div>
-    
-<script>
-    function showDiv() {
-        let details = document.getElementsByClassName("detail")[0];
 
-        if (details.style.display === "block") {
-            details.style.display = "none";
-            document.body.style.overflow = "auto";   // Enable scrolling
-        } else {
-            details.style.display = "block";
-            document.body.style.overflow = "hidden"; // Disable scrolling
+                    <label>Time :</label>
+
+                    <input
+                        type="time"
+                        id="booking_time"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button type="submit" id="bookButton">
+                        Book Now
+                    </button>
+
+                    <button
+                        type="button"
+                        class="close-btn"
+                        onclick="closeDiv()"
+                    >
+                        Close
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // API URL
+
+        const API_URL = "http://localhost:5000/api/bookings/book";
+
+
+        // SELECTED TABLE
+
+        let selectedTableId = null;
+
+
+        // SET MINIMUM DATE
+
+        document.getElementById("booking_date").min =
+            new Date().toLocaleDateString("en-CA");
+
+
+        // OPEN BOOKING POPUP
+
+        function showDiv(tableId, tableNumber, tableClass) {
+
+            selectedTableId = tableId;
+
+            document.getElementById("selectedTable").innerText =
+                "Selected Table: " + tableNumber +
+                " | Class: " + tableClass;
+
+            document.getElementById("bookingPopup").style.display = "block";
+
+            document.body.style.overflow = "hidden";
+
         }
-    }
-</script>
+
+
+        // CLOSE POPUP
+
+        function closeDiv() {
+
+            document.getElementById("bookingPopup").style.display = "none";
+
+            document.body.style.overflow = "auto";
+
+        }
+
+
+        // BOOKING FORM SUBMISSION
+
+        document.getElementById("bookingForm").addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                if (!selectedTableId) {
+
+                    alert("Please select a table!");
+
+                    return;
+
+                }
+
+
+                const bookingData = {
+
+                    table_id: selectedTableId,
+
+                    customer_name:
+                        document.getElementById("customer_name").value.trim(),
+
+                    purpose:
+                        document.getElementById("purpose").value.trim(),
+
+                    phone:
+                        document.getElementById("phone").value.trim(),
+
+                    booking_date:
+                        document.getElementById("booking_date").value,
+
+                    booking_time:
+                        document.getElementById("booking_time").value
+
+                };
+
+
+                const bookButton = document.getElementById("bookButton");
+
+                bookButton.disabled = true;
+
+                bookButton.innerText = "Booking...";
+
+
+                try {
+
+                    const response = await fetch(API_URL, {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(bookingData)
+
+                    });
+
+
+                    const result = await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            result.message || "Booking failed!"
+                        );
+
+                    }
+
+
+                    alert(
+                        result.message +
+                        "\nBooking ID: " + result.booking_id
+                    );
+
+
+                    document.getElementById("bookingForm").reset();
+
+                    closeDiv();
+
+                }
+
+                catch(error) {
+
+                    console.error("Booking Error:", error);
+
+                    alert(error.message || "Server connection failed!");
+
+                }
+
+                finally {
+
+                    bookButton.disabled = false;
+
+                    bookButton.innerText = "Book Now";
+
+                }
+
+            }
+
+        );
+
+
+    </script>
+
 </body>
+
 </html>
